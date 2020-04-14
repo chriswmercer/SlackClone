@@ -9,10 +9,19 @@
 import UIKit
 
 class ChannelViewController: UIViewController {
-
+    
+    @IBOutlet weak var avatarImageView: UIImageView!
+    @IBOutlet weak var loginButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.revealViewController()?.rearViewRevealWidth = self.view.frame.size.width - 60
+    }
+    
+    @IBAction func addChannelButtonPressed(_ sender: Any) {
+    }
+    
+    @IBAction func loginButtonPressed(_ sender: Any) {
     }
 }
