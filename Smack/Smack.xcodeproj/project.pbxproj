@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6E351ED22446F1A7003A626C /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E351ED12446F1A7003A626C /* CreateAccountViewController.swift */; };
 		6E4A75E92445E7540026A44F /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4A75E82445E7540026A44F /* GradientView.swift */; };
 		6E4A75EC2446305A0026A44F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4A75EB2446305A0026A44F /* Constants.swift */; };
 		6E4A75EE244634980026A44F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4A75ED244634980026A44F /* LoginViewController.swift */; };
@@ -23,6 +24,7 @@
 
 /* Begin PBXFileReference section */
 		11CE45BDF3322534B2F15770 /* Pods_Smack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Smack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E351ED12446F1A7003A626C /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
 		6E4A75E82445E7540026A44F /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		6E4A75EB2446305A0026A44F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		6E4A75ED244634980026A44F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 				6E5F296F2444FFF00055D3AB /* ChatViewController.swift */,
 				6E5F29712444FFFE0055D3AB /* ChannelViewController.swift */,
 				6E4A75ED244634980026A44F /* LoginViewController.swift */,
+				6E351ED12446F1A7003A626C /* CreateAccountViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -275,6 +278,7 @@
 				6E5F29702444FFF00055D3AB /* ChatViewController.swift in Sources */,
 				6E4A75EE244634980026A44F /* LoginViewController.swift in Sources */,
 				6E4A75EC2446305A0026A44F /* Constants.swift in Sources */,
+				6E351ED22446F1A7003A626C /* CreateAccountViewController.swift in Sources */,
 				6E5F296B2444DDB10055D3AB /* SWRevealViewController.m in Sources */,
 				6E5F29722444FFFE0055D3AB /* ChannelViewController.swift in Sources */,
 			);
