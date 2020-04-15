@@ -12,6 +12,7 @@ import Foundation
 let BASE_URL = "https://chriswm-chatter.herokuapp.com/v1/"
 let URL_REGISTER = BASE_URL + "account/register"
 let URL_LOGIN = BASE_URL + "account/login"
+let URL_CREATE_USER = BASE_URL + "user/add"
 
 //completion handler
 typealias  CompletionHandler = (_ Success: Bool) -> ()

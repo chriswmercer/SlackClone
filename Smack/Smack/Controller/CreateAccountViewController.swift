@@ -15,6 +15,9 @@ class CreateAccountViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var avatarImage: UIImageView!
     
+    var avatarName = "profileDefault"
+    var avatarColor = "[0.5, 0.5, 0.5, 1]"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -29,22 +32,12 @@ class CreateAccountViewController: UIViewController {
         guard let password = passwordTextField.text, passwordTextField.text != "" else { return }
         
         self.showSpinner(onView: self.view)
-        
-        /*
-        AuthService.instance.registerUser(email: email, password: password) { (success) in
-            self.removeSpinner()
-            if success {
-                print("registered user")
-                AuthService.instance.loginUser(email: email, password: password) { (success) in
-                    print("user logged in")
-                }
-            }
-        }
-         */
-        AuthService.instance.createAccount(email: email, password: password, username: username) { (success) in
+
+        AuthService.instance.createAccount(email: email, password: password, username: username, avatarName: avatarName, avatarColor: avatarColor) { (success) in
             self.removeSpinner()
             if success {
                 print("User created and logged in")
+                self.performSegue(withIdentifier: UNWIND_TO_CHANNEL, sender: nil)
             } else {
                 
             }

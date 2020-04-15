@@ -42,7 +42,21 @@ class AuthService {
         }
     }
     
-    func registerUser(email: String, password: String, completion: @escaping CompletionHandler) {
+    func createAccount(email: String, password: String, username: String, avatarName: String, avatarColor: String, completion: @escaping CompletionHandler) {
+        self.registerUser(email: email, password: password) { (registerSuccess) in
+            if registerSuccess {
+                self.loginUser(email: email, password: password) { (loginSucces) in
+                    if loginSucces {
+                        self.createUser(email: email, name: username, avatarName: avatarName, avatarColor: avatarColor, completion: completion)
+                        completion(true)
+                    }
+                }
+            }
+        }
+        completion(false)
+    }
+    
+    private func registerUser(email: String, password: String, completion: @escaping CompletionHandler) {
         let lowerCaseEmail = email.lowercased()
         
         let requestBody: [String:Any] = [
@@ -60,7 +74,7 @@ class AuthService {
         }
     }
     
-    func loginUser(email: String, password: String, completion: @escaping CompletionHandler) {
+    private func loginUser(email: String, password: String, completion: @escaping CompletionHandler) {
         let requestBody: [String:Any] = [
             "email" : email,
             "password" : password
@@ -87,19 +101,41 @@ class AuthService {
         }
     }
     
-    
-    
-    func createAccount(email: String, password: String, username: String, completion: @escaping CompletionHandler) {
-        self.registerUser(email: email, password: password) { (registerSuccess) in
-            if registerSuccess {
-                self.loginUser(email: email, password: password) { (loginSucces) in
-                    if loginSucces {
-                        //todo: create user details
-                        completion(true)
-                    }
+    private func createUser(email: String, name: String, avatarName: String, avatarColor: String, completion: @escaping CompletionHandler) {
+        let requestBody: [String:Any] = [
+            "name" : name,
+            "email" : email,
+            "avatarName" : avatarName,
+            "avatarColor" : avatarColor
+        ]
+        
+        let headers = [
+            "Authorization" : "Bearer \(authToken)",
+            "Content-Type" : "application/json; charset=utf-8"
+        ]
+        
+        Alamofire.request(URL_CREATE_USER, method: .post, parameters: requestBody, encoding: JSONEncoding.default, headers: headers).responseJSON { (response) in
+            if response.result.error == nil {
+                guard let data = response.data else { return }
+                
+                do {
+                    let json = try JSON(data: data)
+                    let id = json["_id"].stringValue
+                    let name = json["name"].stringValue
+                    let color = json["avatarColor"].stringValue
+                    let avatarName = json["avatarName"].stringValue
+                    let email = json["email"].stringValue
+                    
+                    UserDataService.instance.setUserData(id: id, color: color, avatarName: avatarName, email: email, name: name)
+                    completion(true)
+                } catch {
+                    debugPrint(error)
+                    completion(false)
                 }
+            } else {
+                completion(false)
+                debugPrint(response.result.error as Any)
             }
         }
-        completion(false)
     }
 }
