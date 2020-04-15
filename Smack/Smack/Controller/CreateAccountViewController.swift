@@ -17,8 +17,6 @@ class CreateAccountViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
 
     @IBAction func exitButtonPressed(_ sender: Any) {
@@ -29,9 +27,26 @@ class CreateAccountViewController: UIViewController {
         guard let username = usernameTextField.text, usernameTextField.text != "" else { return }
         guard let email = emailTextField.text , emailTextField.text != "" else { return }
         guard let password = passwordTextField.text, passwordTextField.text != "" else { return }
+        
+        self.showSpinner(onView: self.view)
+        
+        /*
         AuthService.instance.registerUser(email: email, password: password) { (success) in
+            self.removeSpinner()
             if success {
                 print("registered user")
+                AuthService.instance.loginUser(email: email, password: password) { (success) in
+                    print("user logged in")
+                }
+            }
+        }
+         */
+        AuthService.instance.createAccount(email: email, password: password, username: username) { (success) in
+            self.removeSpinner()
+            if success {
+                print("User created and logged in")
+            } else {
+                
             }
         }
     }

@@ -8,6 +8,7 @@
 
 import Foundation
 import Alamofire
+import SwiftyJSON
 
 class AuthService {
     static let instance = AuthService()
@@ -44,10 +45,6 @@ class AuthService {
     func registerUser(email: String, password: String, completion: @escaping CompletionHandler) {
         let lowerCaseEmail = email.lowercased()
         
-        let requestHeader = [
-            "Content-Type" : "application/json; charset=utf-8"
-        ]
-        
         let requestBody: [String:Any] = [
             "email" : lowerCaseEmail,
             "password" : password
@@ -61,5 +58,48 @@ class AuthService {
                 debugPrint(response.result.error as Any)
             }
         }
+    }
+    
+    func loginUser(email: String, password: String, completion: @escaping CompletionHandler) {
+        let requestBody: [String:Any] = [
+            "email" : email,
+            "password" : password
+        ]
+        
+        Alamofire.request(URL_LOGIN, method: HTTPMethod.post, parameters: requestBody, encoding: JSONEncoding.default, headers: requestHeader).responseJSON { (response) in
+            if response.result.error == nil {
+                guard let data = response.data else { return }
+                
+                do {
+                    let json = try JSON(data: data)
+                    self.userEmail = json[RESPONSE_EMAIL_KEY].stringValue
+                    self.authToken = json[RESPONSE_TOKEN_KEY].stringValue
+                    self.isLoggedIn = true
+                    completion(true)
+                } catch {
+                    debugPrint(error)
+                    completion(false)
+                }
+            } else {
+                completion(false)
+                debugPrint(response.result.error as Any)
+            }
+        }
+    }
+    
+    
+    
+    func createAccount(email: String, password: String, username: String, completion: @escaping CompletionHandler) {
+        self.registerUser(email: email, password: password) { (registerSuccess) in
+            if registerSuccess {
+                self.loginUser(email: email, password: password) { (loginSucces) in
+                    if loginSucces {
+                        //todo: create user details
+                        completion(true)
+                    }
+                }
+            }
+        }
+        completion(false)
     }
 }

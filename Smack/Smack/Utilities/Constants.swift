@@ -11,6 +11,7 @@ import Foundation
 //api url
 let BASE_URL = "https://chriswm-chatter.herokuapp.com/v1/"
 let URL_REGISTER = BASE_URL + "account/register"
+let URL_LOGIN = BASE_URL + "account/login"
 
 //completion handler
 typealias  CompletionHandler = (_ Success: Bool) -> ()
@@ -19,6 +20,13 @@ typealias  CompletionHandler = (_ Success: Bool) -> ()
 let LOGGED_IN_KEY = "loggedIn"
 let TOKEN_KEY = "token"
 let USER_EMAIL_KEY = "userEmail"
+
+//web support
+let requestHeader = [
+    "Content-Type" : "application/json; charset=utf-8"
+]
+let RESPONSE_EMAIL_KEY = "user"
+let RESPONSE_TOKEN_KEY = "token"
 
 // segues
 let TO_LOGIN = "segueToLogin"
