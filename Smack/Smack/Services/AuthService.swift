@@ -17,28 +17,28 @@ class AuthService {
     
     var isLoggedIn: Bool {
         get {
-            return defaults.bool(forKey: LOGGED_IN_KEY)
+            return defaults.bool(forKey: DEFAULTS_LOGGED_IN_KEY)
         }
         set {
-            defaults.set(newValue, forKey: LOGGED_IN_KEY)
+            defaults.set(newValue, forKey: DEFAULTS_LOGGED_IN_KEY)
         }
     }
     
     var authToken: String {
         get {
-            return defaults.value(forKey: TOKEN_KEY) as! String
+            return defaults.value(forKey: DEFAULTS_TOKEN_KEY) as! String
         }
         set {
-            defaults.set(newValue, forKey: TOKEN_KEY)
+            defaults.set(newValue, forKey: DEFAULTS_TOKEN_KEY)
         }
     }
     
     var userEmail: String {
         get {
-            return defaults.value(forKey: USER_EMAIL_KEY) as! String
+            return defaults.value(forKey: DEFAULTS_USER_EMAIL_KEY) as! String
         }
         set {
-            defaults.set(newValue, forKey: USER_EMAIL_KEY)
+            defaults.set(newValue, forKey: DEFAULTS_USER_EMAIL_KEY)
         }
     }
     
@@ -86,7 +86,7 @@ class AuthService {
                 
                 do {
                     let json = try JSON(data: data)
-                    self.userEmail = json[RESPONSE_EMAIL_KEY].stringValue
+                    self.userEmail = json[RESPONSE_USERNAME_KEY].stringValue
                     self.authToken = json[RESPONSE_TOKEN_KEY].stringValue
                     self.isLoggedIn = true
                     completion(true)
@@ -120,11 +120,11 @@ class AuthService {
                 
                 do {
                     let json = try JSON(data: data)
-                    let id = json["_id"].stringValue
-                    let name = json["name"].stringValue
-                    let color = json["avatarColor"].stringValue
-                    let avatarName = json["avatarName"].stringValue
-                    let email = json["email"].stringValue
+                    let id = json[RESPONSE_ID_KEY].stringValue
+                    let name = json[RESPONSE_NAME_KEY].stringValue
+                    let color = json[RESPONSE_AVATAR_COLOUR_KEY].stringValue
+                    let avatarName = json[RESPONSE_AVATAR_NAME_KEY].stringValue
+                    let email = json[RESPONSE_EMAIL_KEY].stringValue
                     
                     UserDataService.instance.setUserData(id: id, color: color, avatarName: avatarName, email: email, name: name)
                     completion(true)

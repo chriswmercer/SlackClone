@@ -18,18 +18,27 @@ let URL_CREATE_USER = BASE_URL + "user/add"
 typealias  CompletionHandler = (_ Success: Bool) -> ()
 
 //user defaults
-let LOGGED_IN_KEY = "loggedIn"
-let TOKEN_KEY = "token"
-let USER_EMAIL_KEY = "userEmail"
+let DEFAULTS_LOGGED_IN_KEY = "loggedIn"
+let DEFAULTS_TOKEN_KEY = "token"
+let DEFAULTS_USER_EMAIL_KEY = "userEmail"
 
 //web support
 let requestHeader = [
     "Content-Type" : "application/json; charset=utf-8"
 ]
-let RESPONSE_EMAIL_KEY = "user"
+let RESPONSE_USERNAME_KEY = "user"
 let RESPONSE_TOKEN_KEY = "token"
+let RESPONSE_ID_KEY = "_id"
+let RESPONSE_NAME_KEY = "name"
+let RESPONSE_AVATAR_COLOUR_KEY = "avatarColor"
+let RESPONSE_AVATAR_NAME_KEY = "avatarName"
+let RESPONSE_EMAIL_KEY = "email"
 
 // segues
 let TO_LOGIN = "segueToLogin"
 let TO_CREATE_ACCOUNT = "toCreateAccount"
 let UNWIND_TO_CHANNEL = "unwindToChannel"
+let TO_AVATAR_PICKER = "segueToPickAvatar"
+
+// reuse identifiers - i may have missed some
+let REUSE_ID_AVATAR_IMAGE_CELL = "avatarImageCell"
