@@ -42,3 +42,9 @@ let TO_AVATAR_PICKER = "segueToPickAvatar"
 
 // reuse identifiers - i may have missed some
 let REUSE_ID_AVATAR_IMAGE_CELL = "avatarImageCell"
+
+//colours
+let smackPurplePlaceHolder = #colorLiteral(red: 0.3254901961, green: 0.4196078431, blue: 0.7764705882, alpha: 0.5043519295)
+
+//notificatons
+let NOTIF_USER_DATA_DID_CHANGE = Notification.Name("notifUserDataDidChange")
