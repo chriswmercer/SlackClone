@@ -17,6 +17,22 @@ class ChannelViewController: UIViewController {
         super.viewDidLoad()
 
         self.revealViewController()?.rearViewRevealWidth = self.view.frame.size.width - 60
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(ChannelViewController.userDataDidChange), name: NOTIF_USER_DATA_DID_CHANGE, object: nil)
+    }
+    
+    @objc func userDataDidChange(_ notif: Notification) {
+        if AuthService.instance.isLoggedIn {
+            loginButton.setTitle(UserDataService.instance.name, for: .normal)
+            avatarImageView.image = UIImage(named: UserDataService.instance.avatarName)
+            avatarImageView.backgroundColor = UserDataService.instance.getUIColor(components: UserDataService.instance.avatarColour)
+        } else {
+            loginButton.setTitle("Login", for: .normal)
+            avatarImageView.image = UIImage(named: "menuProfileIcon")
+            avatarImageView.backgroundColor = UIColor.clear
+        }
+        
+        //get channels
     }
     
     @IBAction func addChannelButtonPressed(_ sender: Any) {
