@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftScanner
 
 class UserDataService {
     static let instance = UserDataService()
@@ -29,32 +30,7 @@ class UserDataService {
         self.avatarName = avatarName
     }
     
-    func getUIColor(components: String) -> UIColor {
-        let scanner = Scanner(string: components)
-        let skipped = CharacterSet(charactersIn: "[], ")
-        let comma = ","
-        scanner.charactersToBeSkipped = skipped
-    
-        var r, g, b, a : String?
-        r = scanner.scanUpToString(comma)
-        g = scanner.scanUpToString(comma)
-        b = scanner.scanUpToString(comma)
-        a = scanner.scanUpToString(comma)
-
-        let defaultColour = UIColor.lightGray
-        
-        guard let rUnwrapped = r else { return defaultColour}
-        guard let gUnwrapped = g else { return defaultColour}
-        guard let bUnwrapped = b else { return defaultColour}
-        guard let aUnwrapped = a else { return defaultColour}
-        
-        let rFloat = CGFloat(Double(rUnwrapped)!)
-        let gFloat = CGFloat(Double(gUnwrapped)!)
-        let bFloat = CGFloat(Double(bUnwrapped)!)
-        let aFloat = CGFloat(Double(aUnwrapped)!)
-        
-        let newUIColor = UIColor(red: rFloat, green: gFloat, blue: bFloat, alpha: aFloat)
-        
-        return newUIColor
+    func avatarColorAsUIColor() -> UIColor {
+        return componentStringToUIColour(components: self.avatarColour)
     }
 }
