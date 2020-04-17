@@ -56,6 +56,13 @@ class AuthService {
         completion(false)
     }
     
+    func logout() {
+        isLoggedIn = false
+        authToken = ""
+        userEmail = ""
+        UserDataService.instance.resetDetails()
+    }
+    
     private func registerUser(email: String, password: String, completion: @escaping CompletionHandler) {
         let lowerCaseEmail = email.lowercased()
         

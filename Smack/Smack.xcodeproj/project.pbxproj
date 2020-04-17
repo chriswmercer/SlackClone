@@ -22,6 +22,9 @@
 		6E5F29722444FFFE0055D3AB /* ChannelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5F29712444FFFE0055D3AB /* ChannelViewController.swift */; };
 		6E612F2A2448AD2C008C7D30 /* CircleImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E612F292448AD2C008C7D30 /* CircleImageView.swift */; };
 		6E612F2E2448DABE008C7D30 /* MiscExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E612F2D2448DABD008C7D30 /* MiscExtensions.swift */; };
+		6E6F5D4D2449A87300736D8E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6F5D4B2449A87300736D8E /* ProfileViewController.swift */; };
+		6E6F5D4E2449A87300736D8E /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E6F5D4C2449A87300736D8E /* ProfileViewController.xib */; };
+		6E6F5D512449ADF100736D8E /* RoundedCornerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6F5D502449ADF100736D8E /* RoundedCornerView.swift */; };
 		6E8AD5EA2444C90900824A07 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8AD5E92444C90900824A07 /* AppDelegate.swift */; };
 		6E8AD5EC2444C90900824A07 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8AD5EB2444C90900824A07 /* SceneDelegate.swift */; };
 		6E8AD5F12444C90900824A07 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E8AD5EF2444C90900824A07 /* Main.storyboard */; };
@@ -49,6 +52,9 @@
 		6E5F29712444FFFE0055D3AB /* ChannelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelViewController.swift; sourceTree = "<group>"; };
 		6E612F292448AD2C008C7D30 /* CircleImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImageView.swift; sourceTree = "<group>"; };
 		6E612F2D2448DABD008C7D30 /* MiscExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiscExtensions.swift; sourceTree = "<group>"; };
+		6E6F5D4B2449A87300736D8E /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		6E6F5D4C2449A87300736D8E /* ProfileViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
+		6E6F5D502449ADF100736D8E /* RoundedCornerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCornerView.swift; sourceTree = "<group>"; };
 		6E8AD5E62444C90900824A07 /* Smack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Smack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E8AD5E92444C90900824A07 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6E8AD5EB2444C90900824A07 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -126,6 +132,7 @@
 				6E5F296F2444FFF00055D3AB /* ChatViewController.swift */,
 				6E351ED12446F1A7003A626C /* CreateAccountViewController.swift */,
 				6E4A75ED244634980026A44F /* LoginViewController.swift */,
+				6E6F5D4B2449A87300736D8E /* ProfileViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -144,8 +151,17 @@
 				6E351ED624474FCC003A626C /* RoundedUIButton.swift */,
 				6E351EDE2447AC34003A626C /* AvatarCollectionViewCell.swift */,
 				6E612F292448AD2C008C7D30 /* CircleImageView.swift */,
+				6E6F5D502449ADF100736D8E /* RoundedCornerView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		6E6F5D4F2449A89100736D8E /* XIBs */ = {
+			isa = PBXGroup;
+			children = (
+				6E6F5D4C2449A87300736D8E /* ProfileViewController.xib */,
+			);
+			path = XIBs;
 			sourceTree = "<group>";
 		};
 		6E8AD5DD2444C90900824A07 = {
@@ -169,18 +185,19 @@
 		6E8AD5E82444C90900824A07 /* Smack */ = {
 			isa = PBXGroup;
 			children = (
+				6E8AD5F22444C90B00824A07 /* Assets.xcassets */,
+				6E5F296C2444FF230055D3AB /* Controller */,
 				6E5F296D2444FFC40055D3AB /* Model */,
 				6E5F296E2444FFCA0055D3AB /* View */,
-				6E5F296C2444FF230055D3AB /* Controller */,
 				6E351ED3244746F0003A626C /* Services */,
 				6E5F29672444DD940055D3AB /* Support */,
 				6E4A75EA2446303B0026A44F /* Utilities */,
+				6E6F5D4F2449A89100736D8E /* XIBs */,
 				6E8AD5E92444C90900824A07 /* AppDelegate.swift */,
-				6E8AD5EB2444C90900824A07 /* SceneDelegate.swift */,
-				6E8AD5EF2444C90900824A07 /* Main.storyboard */,
-				6E8AD5F22444C90B00824A07 /* Assets.xcassets */,
-				6E8AD5F42444C90B00824A07 /* LaunchScreen.storyboard */,
 				6E8AD5F72444C90B00824A07 /* Info.plist */,
+				6E8AD5F42444C90B00824A07 /* LaunchScreen.storyboard */,
+				6E8AD5EF2444C90900824A07 /* Main.storyboard */,
+				6E8AD5EB2444C90900824A07 /* SceneDelegate.swift */,
 			);
 			path = Smack;
 			sourceTree = "<group>";
@@ -248,6 +265,7 @@
 			files = (
 				6E8AD5F62444C90B00824A07 /* LaunchScreen.storyboard in Resources */,
 				6E8AD5F32444C90B00824A07 /* Assets.xcassets in Resources */,
+				6E6F5D4E2449A87300736D8E /* ProfileViewController.xib in Resources */,
 				6E8AD5F12444C90900824A07 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -310,8 +328,10 @@
 				6E351ED9244751CC003A626C /* ActivityIndicatorExtension.swift in Sources */,
 				6E351EDB24477F12003A626C /* UserDataService.swift in Sources */,
 				6E8AD5EA2444C90900824A07 /* AppDelegate.swift in Sources */,
+				6E6F5D512449ADF100736D8E /* RoundedCornerView.swift in Sources */,
 				6E8AD5EC2444C90900824A07 /* SceneDelegate.swift in Sources */,
 				6E4A75E92445E7540026A44F /* GradientView.swift in Sources */,
+				6E6F5D4D2449A87300736D8E /* ProfileViewController.swift in Sources */,
 				6E5F29702444FFF00055D3AB /* ChatViewController.swift in Sources */,
 				6E4A75EE244634980026A44F /* LoginViewController.swift in Sources */,
 				6E4A75EC2446305A0026A44F /* Constants.swift in Sources */,

@@ -33,4 +33,12 @@ class UserDataService {
     func avatarColorAsUIColor() -> UIColor {
         return componentStringToUIColour(components: self.avatarColour)
     }
+    
+    func resetDetails() {
+        id = ""
+        avatarColour = ""
+        avatarName = ""
+        email = ""
+        name = ""
+    }
 }
