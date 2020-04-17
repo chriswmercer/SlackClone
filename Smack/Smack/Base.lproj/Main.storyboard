@@ -264,6 +264,12 @@
                                     <action selector="signupButtonPressed:" destination="bQE-Ae-NAc" eventType="touchUpInside" id="ptt-NW-foi"/>
                                 </connections>
                             </button>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email or password invalid, please check your credentials" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yeV-G2-AsM">
+                                <rect key="frame" x="16" y="265" width="343" height="21"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="12"/>
+                                <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -271,12 +277,16 @@
                             <constraint firstItem="IcV-hg-GxZ" firstAttribute="top" secondItem="7Eu-s8-Sny" secondAttribute="bottom" constant="38" id="3WX-eX-mcv"/>
                             <constraint firstItem="7Eu-s8-Sny" firstAttribute="top" secondItem="uW3-15-rLf" secondAttribute="top" constant="63" id="6vN-n7-1Rf"/>
                             <constraint firstItem="M1Z-c3-i8m" firstAttribute="top" secondItem="uW3-15-rLf" secondAttribute="top" constant="20" id="Cxh-Et-uV4"/>
+                            <constraint firstItem="uW3-15-rLf" firstAttribute="trailing" secondItem="yeV-G2-AsM" secondAttribute="trailing" constant="16" id="D3d-Ew-lSn"/>
                             <constraint firstItem="wY9-zp-HuO" firstAttribute="centerX" secondItem="EgI-u4-PXp" secondAttribute="centerX" id="DM4-pI-NTN"/>
                             <constraint firstItem="wY9-zp-HuO" firstAttribute="centerX" secondItem="EgI-u4-PXp" secondAttribute="centerX" id="JCU-Qd-ckS"/>
+                            <constraint firstItem="yeV-G2-AsM" firstAttribute="leading" secondItem="uW3-15-rLf" secondAttribute="leading" constant="16" id="Kby-Jr-WUt"/>
                             <constraint firstItem="7Eu-s8-Sny" firstAttribute="centerX" secondItem="EgI-u4-PXp" secondAttribute="centerX" id="MMB-kY-cjJ"/>
+                            <constraint firstItem="U2c-a2-0uV" firstAttribute="top" secondItem="yeV-G2-AsM" secondAttribute="bottom" constant="14.5" id="Qyj-yJ-YgA"/>
                             <constraint firstItem="uW3-15-rLf" firstAttribute="trailing" secondItem="M1Z-c3-i8m" secondAttribute="trailing" constant="16" id="VWl-u6-p1G"/>
                             <constraint firstItem="IcV-hg-GxZ" firstAttribute="centerX" secondItem="EgI-u4-PXp" secondAttribute="centerX" id="Ylv-av-aqX"/>
                             <constraint firstItem="U2c-a2-0uV" firstAttribute="top" secondItem="IcV-hg-GxZ" secondAttribute="bottom" constant="43" id="aTu-ir-tdg"/>
+                            <constraint firstItem="yeV-G2-AsM" firstAttribute="top" secondItem="IcV-hg-GxZ" secondAttribute="bottom" constant="7.5" id="uKy-lt-InI"/>
                             <constraint firstItem="U2c-a2-0uV" firstAttribute="centerX" secondItem="EgI-u4-PXp" secondAttribute="centerX" id="y20-K6-A8L"/>
                             <constraint firstItem="wY9-zp-HuO" firstAttribute="top" secondItem="U2c-a2-0uV" secondAttribute="bottom" constant="12.5" id="zJc-ZV-CQb"/>
                         </constraints>
@@ -284,6 +294,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="yFI-Dk-pki"/>
                     <connections>
+                        <outlet property="errorLabel" destination="yeV-G2-AsM" id="ffK-Tb-Tte"/>
                         <outlet property="passwordTextField" destination="pcl-GO-Kdo" id="bh3-Is-hcC"/>
                         <outlet property="usernameTextField" destination="tiW-Ss-56f" id="sMh-fQ-7kD"/>
                         <segue destination="aXh-BF-CbA" kind="presentation" identifier="toCreateAccount" modalPresentationStyle="fullScreen" id="WwH-yE-u49"/>

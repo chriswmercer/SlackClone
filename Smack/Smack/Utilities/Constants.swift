@@ -13,6 +13,8 @@ let BASE_URL = "https://chriswm-chatter.herokuapp.com/v1/"
 let URL_REGISTER = BASE_URL + "account/register"
 let URL_LOGIN = BASE_URL + "account/login"
 let URL_CREATE_USER = BASE_URL + "user/add"
+let URL_USER_BY_EMAIL = BASE_URL + "user/byEmail/"
+let URL_GET_CHANNELS = BASE_URL + "channel/"
 
 //completion handler
 typealias  CompletionHandler = (_ Success: Bool) -> ()
@@ -26,6 +28,10 @@ let DEFAULTS_USER_EMAIL_KEY = "userEmail"
 let requestHeader = [
     "Content-Type" : "application/json; charset=utf-8"
 ]
+let bearerHeader = [
+    "Authorization" : "Bearer \(AuthService.instance.authToken)",
+    "Content-Type" : "application/json; charset=utf-8"
+]
 let RESPONSE_USERNAME_KEY = "user"
 let RESPONSE_TOKEN_KEY = "token"
 let RESPONSE_ID_KEY = "_id"
@@ -33,6 +39,7 @@ let RESPONSE_NAME_KEY = "name"
 let RESPONSE_AVATAR_COLOUR_KEY = "avatarColor"
 let RESPONSE_AVATAR_NAME_KEY = "avatarName"
 let RESPONSE_EMAIL_KEY = "email"
+let RESPONSE_MESSAGE_KEY = "message"
 
 // segues
 let TO_LOGIN = "segueToLogin"

@@ -21,7 +21,11 @@ class ChannelViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(ChannelViewController.userDataDidChange), name: NOTIF_USER_DATA_DID_CHANGE, object: nil)
     }
     
-    @objc func userDataDidChange(_ notif: Notification) {
+    override func viewDidAppear(_ animated: Bool) {
+        setupUserInfo()
+    }
+    
+    func setupUserInfo() {
         if AuthService.instance.isLoggedIn {
             loginButton.setTitle(UserDataService.instance.name, for: .normal)
             avatarImageView.image = UIImage(named: UserDataService.instance.avatarName)
@@ -33,6 +37,10 @@ class ChannelViewController: UIViewController {
         }
         
         //get channels
+    }
+    
+    @objc func userDataDidChange(_ notif: Notification) {
+        setupUserInfo()
     }
     
     @IBAction func addChannelButtonPressed(_ sender: Any) {
