@@ -15,6 +15,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var messageTextBox: UITextField!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var sendButton: UIButton!
+    @IBOutlet weak var typingUsersLabel: UILabel!
     
     var isTyping = false
     
@@ -56,6 +57,28 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
                 NotificationCenter.default.post(name: NOTIF_MESSAGE_ADDED, object: nil)
             }
         }
+        
+        SocketService.instance.getTypingUsers { (typingUsers) in
+            guard let channelId = MessageService.instance.selectedChannel?.id else { return }
+            var names = ""
+            var numberOfTypes = 0
+            for (typingUser, channel) in typingUsers {
+                if typingUser != UserDataService.instance.name && channel == channelId {
+                    if names == "" {
+                        names = typingUser
+                    } else {
+                        names = "\(names), \(typingUser)"
+                    }
+                    numberOfTypes += 1
+                }
+            }
+            if AuthService.instance.isLoggedIn && numberOfTypes > 0 {
+                let verb = numberOfTypes > 1 ? "are" : "is"
+                self.typingUsersLabel.text = "\(names) \(verb) typing a message"
+            } else {
+                self.typingUsersLabel.text = ""
+            }
+        }
     }
         
     @IBAction func sendMessagePressed(_ sender: Any) {
@@ -66,6 +89,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
                 if success {
                     self.messageTextBox.text = ""
                     self.messageTextBox.resignFirstResponder()
+                    SocketService.instance.stopTyping(username: UserDataService.instance.name, channelId: channelId)
                 }
             }
         }
@@ -147,9 +171,11 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         if messageTextBox.text == "" {
             isTyping = false
             sendButton.isHidden = true
+            SocketService.instance.stopTyping(username: UserDataService.instance.name, channelId: MessageService.instance.selectedChannel!.id)
         } else {
             if isTyping == false {
                 sendButton.isHidden = false
+                SocketService.instance.startTyping(username: UserDataService.instance.name, channelId: MessageService.instance.selectedChannel!.id)
             }
             isTyping = true
         }
