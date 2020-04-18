@@ -15,6 +15,7 @@ class MessageService {
     static let instance = MessageService()
     
     var channels = [Channel]()
+    var selectedChannel: Channel?
     
     func findAllChannels(completion: @escaping CompletionHandler) {
         Alamofire.request(URL_GET_CHANNELS, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: bearerHeader).responseJSON { (response) in
@@ -23,6 +24,7 @@ class MessageService {
                 do
                 {
                     if let json = try JSON(data: data).array {
+                        self.clearChannels()
                         for item in json {
                             let name = item["name"].stringValue
                             let description = item["description"].stringValue
@@ -45,6 +47,6 @@ class MessageService {
     }
     
     func clearChannels() {
-        channels = [Channel]()
+        channels.removeAll()
     }
 }

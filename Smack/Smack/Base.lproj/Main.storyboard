@@ -207,7 +207,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="IcV-hg-GxZ">
                                 <rect key="frame" x="62.5" y="177" width="250" height="80.5"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tiW-Ss-56f">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tiW-Ss-56f">
                                         <rect key="frame" x="0.0" y="0.0" width="250" height="18.5"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="18.5" id="Lat-8s-eEW"/>
@@ -655,6 +655,7 @@
                     </view>
                     <connections>
                         <outlet property="menuButton" destination="FHk-sQ-3pa" id="rlV-6J-Hd7"/>
+                        <outlet property="smackText" destination="YJ8-8g-szb" id="LJZ-Ff-Ak4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qbK-2Z-SE3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

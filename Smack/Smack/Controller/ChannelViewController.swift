@@ -50,6 +50,11 @@ class ChannelViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     @objc func updateChannelList() {
+        if MessageService.instance.channels.count == 0 {
+            MessageService.instance.findAllChannels { (success) in
+                print("got channels")
+            }
+        }
         self.tableView.reloadData()
     }
     
@@ -91,5 +96,12 @@ class ChannelViewController: UIViewController, UITableViewDelegate, UITableViewD
         } else {
             return UITableViewCell()
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let channel = MessageService.instance.channels[indexPath.row]
+        MessageService.instance.selectedChannel = channel
+        NotificationCenter.default.post(name: NOTIF_CHANNEL_SELECT, object: nil)
+        self.revealViewController().revealToggle(animated: true)
     }
 }

@@ -68,6 +68,7 @@ class CreateAccountViewController: UIViewController {
                 self.removeSpinner()
                 print("User created and logged in")
                 NotificationCenter.default.post(name: NOTIF_USER_DATA_DID_CHANGE, object: nil)
+                NotificationCenter.default.post(name: NOTIF_CHANNEL_DATA_DID_CHANGE, object: nil)
                 self.performSegue(withIdentifier: UNWIND_TO_CHANNEL, sender: nil)
             } else {
 
