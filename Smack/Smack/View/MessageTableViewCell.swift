@@ -32,7 +32,7 @@ class MessageTableViewCell: UITableViewCell {
             dateFormatter.locale = Locale(identifier: "en_US_POSIX")
             
             if let date = dateFormatter.date(from: datetime) {
-                dateFormatter.dateFormat = "dd-MMM, HH:mm:ss"
+                dateFormatter.dateFormat = "dd-MMM HH:mm:ss"
                 let formattedDate = dateFormatter.string(from: date)
                 timestampLabel.text = "\(formattedDate)"
             } else {
