@@ -644,17 +644,39 @@
                                     <constraint firstAttribute="bottom" secondItem="FHk-sQ-3pa" secondAttribute="bottom" constant="12" id="jjw-HQ-7EM"/>
                                 </constraints>
                             </view>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="message" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Xed-kR-clw">
+                                <rect key="frame" x="0.0" y="627" width="375" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="B5m-DF-h88"/>
+                                </constraints>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3RC-xI-1Gm">
+                                <rect key="frame" x="337" y="632" width="30" height="30"/>
+                                <state key="normal" image="send"/>
+                                <connections>
+                                    <action selector="sendMessagePressed:" destination="Cup-A5-dgd" eventType="touchUpInside" id="ysA-Js-HmY"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="fEv-gp-xW0" firstAttribute="leading" secondItem="uNu-lk-SjW" secondAttribute="leading" id="1LT-8l-iAa"/>
+                            <constraint firstItem="uNu-lk-SjW" firstAttribute="trailing" secondItem="Xed-kR-clw" secondAttribute="trailing" id="3Ke-NS-MFp"/>
                             <constraint firstItem="fEv-gp-xW0" firstAttribute="trailing" secondItem="uNu-lk-SjW" secondAttribute="trailing" id="QEc-Dw-kdF"/>
                             <constraint firstItem="fEv-gp-xW0" firstAttribute="top" secondItem="uNu-lk-SjW" secondAttribute="top" id="ROA-Hg-BWr"/>
+                            <constraint firstItem="uNu-lk-SjW" firstAttribute="trailing" secondItem="3RC-xI-1Gm" secondAttribute="trailing" constant="8" id="a8T-qq-ySN"/>
+                            <constraint firstItem="Xed-kR-clw" firstAttribute="bottom" secondItem="uNu-lk-SjW" secondAttribute="bottom" id="hrJ-f0-LMX"/>
+                            <constraint firstItem="3RC-xI-1Gm" firstAttribute="centerY" secondItem="Xed-kR-clw" secondAttribute="centerY" id="iwT-IU-lyJ"/>
+                            <constraint firstItem="Xed-kR-clw" firstAttribute="leading" secondItem="uNu-lk-SjW" secondAttribute="leading" id="ygi-4v-nUz"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="uNu-lk-SjW"/>
                     </view>
                     <connections>
                         <outlet property="menuButton" destination="FHk-sQ-3pa" id="rlV-6J-Hd7"/>
+                        <outlet property="messageTextBox" destination="Xed-kR-clw" id="BxA-7f-eeK"/>
                         <outlet property="smackText" destination="YJ8-8g-szb" id="LJZ-Ff-Ak4"/>
                     </connections>
                 </viewController>
@@ -669,6 +691,7 @@
         <image name="dark0" width="100" height="100"/>
         <image name="menuProfileIcon" width="99" height="99"/>
         <image name="profileDefault" width="192" height="192"/>
+        <image name="send" width="30" height="30"/>
         <image name="smackBack" width="28" height="28"/>
         <image name="smackBurger" width="40" height="40"/>
         <image name="smackLogo" width="48" height="40"/>

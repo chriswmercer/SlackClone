@@ -15,6 +15,7 @@ let URL_LOGIN = BASE_URL + "account/login"
 let URL_CREATE_USER = BASE_URL + "user/add"
 let URL_USER_BY_EMAIL = BASE_URL + "user/byEmail/"
 let URL_GET_CHANNELS = BASE_URL + "channel/"
+let URL_GET_MESSAGES = BASE_URL + "message/byChannel"
 
 //completion handler
 typealias  CompletionHandler = (_ Success: Bool) -> ()
@@ -61,3 +62,4 @@ let NOTIF_CHANNEL_SELECT = Notification.Name("notifyChannelSelected")
 //socket events
 let SOCKET_EVENT_NEW_CHANNEL = "newChannel"
 let SOCKET_EVENT_CHANNEL_CREATED = "channelCreated"
+let SOCKET_EVENT_NEW_MESSAGE = "newMessage"

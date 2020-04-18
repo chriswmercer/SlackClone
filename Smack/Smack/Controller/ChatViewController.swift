@@ -12,8 +12,8 @@ class ChatViewController: UIViewController {
 
     @IBOutlet weak var menuButton: UIButton!
     @IBOutlet weak var smackText: UILabel!
+    @IBOutlet weak var messageTextBox: UITextField!
     
-        
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -21,6 +21,11 @@ class ChatViewController: UIViewController {
         menuButton.addTarget(self.revealViewController(), action: #selector(SWRevealViewController.revealToggle(_:)), for: .touchUpInside)
         self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         self.view.addGestureRecognizer(self.revealViewController().tapGestureRecognizer())
+        
+        //set up keyboard
+        view.bindToKeyboard()
+        let tap = UITapGestureRecognizer(target: self, action: #selector(ChatViewController.handleTap))
+        view.addGestureRecognizer(tap)
         
         self.updateText()
         
@@ -37,13 +42,34 @@ class ChatViewController: UIViewController {
             }
         }
     }
+        
+    @IBAction func sendMessagePressed(_ sender: Any) {
+        if AuthService.instance.isLoggedIn {
+            guard let channelId = MessageService.instance.selectedChannel?.id else { return }
+            guard let message = messageTextBox.text else { return }
+            SocketService.instance.addMessage(messageBody: message, userId: UserDataService.instance.id, channelId: channelId) { (success) in
+                if success {
+                    self.messageTextBox.text = ""
+                    self.messageTextBox.resignFirstResponder()
+                }
+            }
+        }
+    }
     
     @objc func userDataDidChange(_ notif: Notification) {
         updateText()
+        
+        if AuthService.instance.isLoggedIn {
+            onLoginGetMessages()
+        }
     }
     
     @objc func channelSelected(_ notif: Notification) {
         updateWithChannel()
+    }
+    
+    @objc func handleTap() {
+        view.endEditing(true)
     }
     
     func updateText() {
@@ -57,5 +83,26 @@ class ChatViewController: UIViewController {
     func updateWithChannel() {
         let channelName = MessageService.instance.selectedChannel?.title ?? ""
         smackText.text = "Smack - #\(channelName)"
+        getMessages()
+    }
+    
+    func onLoginGetMessages() {
+        MessageService.instance.findAllChannels { (success) in
+            if success {
+                if MessageService.instance.channels.count > 0 {
+                    MessageService.instance.selectedChannel = MessageService.instance.channels[0]
+                    self.updateWithChannel()
+                } else {
+                    self.smackText.text = "Smack - No Channels Yet!"
+                }
+            }
+        }
+    }
+    
+    func getMessages() {
+        guard let channelId = MessageService.instance.selectedChannel?.id else { return }
+        MessageService.instance.findAllMessagesForChannel(channelId: channelId) { (success) in
+            
+        }
     }
 }
