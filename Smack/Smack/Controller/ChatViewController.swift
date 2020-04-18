@@ -53,8 +53,17 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
                 NotificationCenter.default.post(name: NOTIF_CHANNEL_DATA_DID_CHANGE, object: nil)
             }
             
-            SocketService.instance.getMessage { (success) in
-                NotificationCenter.default.post(name: NOTIF_MESSAGE_ADDED, object: nil)
+            SocketService.instance.getMessage { (message) in
+                guard let channelId = MessageService.instance.selectedChannel?.id else { return }
+                guard let messageChannelId = message.channelId else { return }
+                
+                if channelId == messageChannelId {
+                    MessageService.instance.messages.append(message)
+                    NotificationCenter.default.post(name: NOTIF_MESSAGE_ADDED, object: nil)
+                } else {
+                    MessageService.instance.unreadChannels.append(messageChannelId)
+                    NotificationCenter.default.post(name: NOTIF_MESSAGE_ADDED_DIFFERENT_CHANNEL, object: nil)
+                }
             }
         }
         

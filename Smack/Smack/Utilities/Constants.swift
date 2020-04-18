@@ -59,6 +59,7 @@ let NOTIF_USER_DATA_DID_CHANGE = Notification.Name("notifUserDataDidChange")
 let NOTIF_CHANNEL_DATA_DID_CHANGE = Notification.Name("notifChanelDataDidChange")
 let NOTIF_CHANNEL_SELECT = Notification.Name("notifyChannelSelected")
 let NOTIF_MESSAGE_ADDED = Notification.Name("notifyMessageAdded")
+let NOTIF_MESSAGE_ADDED_DIFFERENT_CHANNEL = Notification.Name("notifyMessageAddedDifferentChannel")
 
 //socket events
 let SOCKET_EVENT_NEW_CHANNEL = "newChannel"

@@ -22,8 +22,22 @@ class MessageTableViewCell: UITableViewCell {
     func configureCell(message: Message) {
         messageLabel.text = message.message
         usernameLabel.text = message.userName
-        //timestampLabel.text = message.timeStamp
         userImage.image = UIImage(named: message.userAvatar)
         userImage.backgroundColor = componentStringToUIColour(components: message.userAvatarColour)
+        
+        if let datetime = message.timeStamp {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
+            dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+            dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+            
+            if let date = dateFormatter.date(from: datetime) {
+                dateFormatter.dateFormat = "dd-MMM, HH:mm:ss"
+                let formattedDate = dateFormatter.string(from: date)
+                timestampLabel.text = "\(formattedDate)"
+            } else {
+                timestampLabel.text = "\(datetime)"
+            }
+        }
     }
 }

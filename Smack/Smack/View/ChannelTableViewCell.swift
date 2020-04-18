@@ -17,8 +17,6 @@ class ChannelTableViewCell: UITableViewCell {
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
-        //super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
         if selected {
             channelName.font = UIFont(name:"HelveticaNeue-Bold", size: 17.0)
@@ -32,6 +30,14 @@ class ChannelTableViewCell: UITableViewCell {
         if !title.starts(with: "#") {
             title = "#\(title)"
         }
+        
+        for id in MessageService.instance.unreadChannels {
+            if channel.id == id {
+                title += "   (UNREAD)"
+                break
+            }
+        }
+        
         channelName.text = title
     }
 

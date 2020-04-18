@@ -23,6 +23,7 @@ class ChannelViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         NotificationCenter.default.addObserver(self, selector: #selector(ChannelViewController.userDataDidChange), name: NOTIF_USER_DATA_DID_CHANGE, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(ChannelViewController.updateChannelList), name: NOTIF_CHANNEL_DATA_DID_CHANGE, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ChannelViewController.messageWasAddedToDifferentChannel), name: NOTIF_MESSAGE_ADDED, object: nil)
         
         SocketService.instance.getChannel { (success) in
             self.updateChannelList()
@@ -44,6 +45,10 @@ class ChannelViewController: UIViewController, UITableViewDelegate, UITableViewD
             avatarImageView.image = UIImage(named: "menuProfileIcon")
             avatarImageView.backgroundColor = UIColor.clear
         }
+    }
+    
+    @objc func messageWasAddedToDifferentChannel() {
+        updateChannelList()
     }
     
     @objc func userDataDidChange(_ notif: Notification) {
@@ -107,17 +112,25 @@ class ChannelViewController: UIViewController, UITableViewDelegate, UITableViewD
                 if !success {
                     return
                 } else {
-                    self.loadMessage(index: index)
+                    self.loadMessage(index: index, indexPath: indexPath)
                 }
             }
         } else {
-            loadMessage(index: index)
+            loadMessage(index: index, indexPath: indexPath)
         }
     }
     
-    func loadMessage(index: Int) {
+    func loadMessage(index: Int, indexPath: IndexPath) {
         let channel = MessageService.instance.channels[index]
         MessageService.instance.selectedChannel = channel
+        
+        if MessageService.instance.unreadChannels.count > 0 {
+            MessageService.instance.unreadChannels = MessageService.instance.unreadChannels.filter{$0 != channel.id}
+        }
+        let index = IndexPath(row: indexPath.row, section: 0)
+        tableView.reloadRows(at: [index], with: .none)
+        tableView.selectRow(at: index, animated: false, scrollPosition: .none)
+        
         NotificationCenter.default.post(name: NOTIF_CHANNEL_SELECT, object: nil)
         self.revealViewController().revealToggle(animated: true)
     }
