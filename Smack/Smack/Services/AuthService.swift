@@ -61,8 +61,15 @@ class AuthService {
             if success {
                 self.findUserByEmail { (findSuccess) in
                     if findSuccess {
-                        print("Logged In")
-                        completion(true)
+                        MessageService.instance.findAllChannels { (success) in
+                            if success {
+                                print("Logged In")
+                                completion(true)
+                            } else {
+                                completion(false)
+                            }
+                        }
+
                     } else {
                         print("Could not log in")
                         completion(false)
@@ -89,6 +96,7 @@ class AuthService {
         authToken = ""
         userEmail = ""
         UserDataService.instance.resetDetails()
+        MessageService.instance.clearChannels()
     }
     
     private func findUserByEmail(completion: @escaping CompletionHandler) {

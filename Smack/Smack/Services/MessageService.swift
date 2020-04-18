@@ -29,9 +29,9 @@ class MessageService {
                             let id = item["_id"].stringValue
                             let channel = Channel(id: id, title: name, description: description)
                             self.channels.append(channel)
-                            completion(true)
-                            return
                         }
+                        completion(true)
+                        return
                     }
                 } catch {
                     debugPrint(error as Any)
@@ -42,5 +42,9 @@ class MessageService {
             
             completion(false)
         }
+    }
+    
+    func clearChannels() {
+        channels = [Channel]()
     }
 }

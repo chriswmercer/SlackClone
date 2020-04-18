@@ -41,6 +41,7 @@ class ProfileViewController: UIViewController {
     @IBAction func logoutButtonPressed(_ sender: Any) {
         AuthService.instance.logout()
         NotificationCenter.default.post(name: NOTIF_USER_DATA_DID_CHANGE, object: nil)
+        NotificationCenter.default.post(name: NOTIF_CHANNEL_DATA_DID_CHANGE, object: nil)
         dismiss(animated: true, completion: nil)
     }
 }

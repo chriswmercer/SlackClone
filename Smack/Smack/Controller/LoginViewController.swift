@@ -31,6 +31,7 @@ class LoginViewController: UIViewController {
         AuthService.instance.login(email: username, password: password) { (success) in
             if success {
                 NotificationCenter.default.post(name: NOTIF_USER_DATA_DID_CHANGE, object: nil)
+                NotificationCenter.default.post(name: NOTIF_CHANNEL_DATA_DID_CHANGE, object: nil)
                 self.dismiss(animated: true, completion: nil)
             } else {
                 self.errorLabel.isHidden = false

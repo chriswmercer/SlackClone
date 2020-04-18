@@ -24,6 +24,10 @@ class ChatViewController: UIViewController {
             AuthService.instance.wakeUser { (sucecss) in
                 NotificationCenter.default.post(name: NOTIF_USER_DATA_DID_CHANGE, object: nil)
             }
+            
+            MessageService.instance.findAllChannels { (success) in
+                NotificationCenter.default.post(name: NOTIF_CHANNEL_DATA_DID_CHANGE, object: nil)
+            }
         }
     }
 }
