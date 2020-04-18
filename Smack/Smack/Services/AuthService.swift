@@ -97,6 +97,7 @@ class AuthService {
         userEmail = ""
         UserDataService.instance.resetDetails()
         MessageService.instance.clearChannels()
+        MessageService.instance.clearMessages()
     }
     
     private func findUserByEmail(completion: @escaping CompletionHandler) {

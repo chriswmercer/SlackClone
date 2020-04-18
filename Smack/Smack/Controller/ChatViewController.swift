@@ -8,14 +8,23 @@
 
 import UIKit
 
-class ChatViewController: UIViewController {
+class ChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var menuButton: UIButton!
     @IBOutlet weak var smackText: UILabel!
     @IBOutlet weak var messageTextBox: UITextField!
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var sendButton: UIButton!
+    
+    var isTyping = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        tableView.estimatedRowHeight = 80
+        tableView.rowHeight = UITableView.automaticDimension
         
         //hook up button
         menuButton.addTarget(self.revealViewController(), action: #selector(SWRevealViewController.revealToggle(_:)), for: .touchUpInside)
@@ -26,11 +35,13 @@ class ChatViewController: UIViewController {
         view.bindToKeyboard()
         let tap = UITapGestureRecognizer(target: self, action: #selector(ChatViewController.handleTap))
         view.addGestureRecognizer(tap)
+        sendButton.isHidden = true
         
         self.updateText()
         
         NotificationCenter.default.addObserver(self, selector: #selector(ChatViewController.userDataDidChange), name: NOTIF_USER_DATA_DID_CHANGE, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(ChatViewController.channelSelected), name: NOTIF_CHANNEL_SELECT, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ChatViewController.messageAdded), name: NOTIF_MESSAGE_ADDED, object: nil)
         
         if AuthService.instance.isLoggedIn {
             AuthService.instance.wakeUser { (sucecss) in
@@ -39,6 +50,10 @@ class ChatViewController: UIViewController {
             
             MessageService.instance.findAllChannels { (success) in
                 NotificationCenter.default.post(name: NOTIF_CHANNEL_DATA_DID_CHANGE, object: nil)
+            }
+            
+            SocketService.instance.getMessage { (success) in
+                NotificationCenter.default.post(name: NOTIF_MESSAGE_ADDED, object: nil)
             }
         }
     }
@@ -66,6 +81,11 @@ class ChatViewController: UIViewController {
     
     @objc func channelSelected(_ notif: Notification) {
         updateWithChannel()
+    }
+    
+    @objc func messageAdded(_ notif: Notification) {
+        self.tableView.setContentOffset(CGPoint(x: 0, y: CGFloat.greatestFiniteMagnitude), animated: true)
+        self.tableView.reloadData()
     }
     
     @objc func handleTap() {
@@ -102,7 +122,36 @@ class ChatViewController: UIViewController {
     func getMessages() {
         guard let channelId = MessageService.instance.selectedChannel?.id else { return }
         MessageService.instance.findAllMessagesForChannel(channelId: channelId) { (success) in
-            
+            if success {
+                self.tableView.setContentOffset(CGPoint(x: 0, y: CGFloat.greatestFiniteMagnitude), animated: true)
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return MessageService.instance.messages.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "messageCell", for: indexPath) as? MessageTableViewCell {
+            let message = MessageService.instance.messages[indexPath.row]
+            cell.configureCell(message: message)
+            return cell
+        } else {
+            return UITableViewCell()
+        }
+    }
+    
+    @IBAction func messageBoxEditing(_ sender: Any) {
+        if messageTextBox.text == "" {
+            isTyping = false
+            sendButton.isHidden = true
+        } else {
+            if isTyping == false {
+                sendButton.isHidden = false
+            }
+            isTyping = true
         }
     }
 }

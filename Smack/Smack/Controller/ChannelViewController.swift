@@ -38,6 +38,7 @@ class ChannelViewController: UIViewController, UITableViewDelegate, UITableViewD
             loginButton.setTitle(UserDataService.instance.name, for: .normal)
             avatarImageView.image = UIImage(named: UserDataService.instance.avatarName)
             avatarImageView.backgroundColor = UserDataService.instance.avatarColorAsUIColor()
+            updateChannelList()
         } else {
             loginButton.setTitle("Login", for: .normal)
             avatarImageView.image = UIImage(named: "menuProfileIcon")
@@ -99,7 +100,23 @@ class ChannelViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let channel = MessageService.instance.channels[indexPath.row]
+        let index = indexPath.row
+        let count = MessageService.instance.channels.count
+        if  count == 0 || index >= count {
+            MessageService.instance.findAllChannels { (success) in
+                if !success {
+                    return
+                } else {
+                    self.loadMessage(index: index)
+                }
+            }
+        } else {
+            loadMessage(index: index)
+        }
+    }
+    
+    func loadMessage(index: Int) {
+        let channel = MessageService.instance.channels[index]
         MessageService.instance.selectedChannel = channel
         NotificationCenter.default.post(name: NOTIF_CHANNEL_SELECT, object: nil)
         self.revealViewController().revealToggle(animated: true)

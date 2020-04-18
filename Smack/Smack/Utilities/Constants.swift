@@ -15,7 +15,7 @@ let URL_LOGIN = BASE_URL + "account/login"
 let URL_CREATE_USER = BASE_URL + "user/add"
 let URL_USER_BY_EMAIL = BASE_URL + "user/byEmail/"
 let URL_GET_CHANNELS = BASE_URL + "channel/"
-let URL_GET_MESSAGES = BASE_URL + "message/byChannel"
+let URL_GET_MESSAGES = BASE_URL + "message/byChannel/"
 
 //completion handler
 typealias  CompletionHandler = (_ Success: Bool) -> ()
@@ -58,8 +58,10 @@ let smackPurplePlaceHolder = #colorLiteral(red: 0.3254901961, green: 0.419607843
 let NOTIF_USER_DATA_DID_CHANGE = Notification.Name("notifUserDataDidChange")
 let NOTIF_CHANNEL_DATA_DID_CHANGE = Notification.Name("notifChanelDataDidChange")
 let NOTIF_CHANNEL_SELECT = Notification.Name("notifyChannelSelected")
+let NOTIF_MESSAGE_ADDED = Notification.Name("notifyMessageAdded")
 
 //socket events
 let SOCKET_EVENT_NEW_CHANNEL = "newChannel"
 let SOCKET_EVENT_CHANNEL_CREATED = "channelCreated"
 let SOCKET_EVENT_NEW_MESSAGE = "newMessage"
+let SOCKET_EVENT_MESSAGE_CREATE = "messageCreated"
